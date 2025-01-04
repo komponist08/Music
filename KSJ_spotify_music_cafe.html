@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Cafe</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+        .image-container {
+            position: relative;
+            width: 1920px; /* Adjust based on your image size */
+            margin: 20px auto;
+        }
+        .image-container img {
+            width: 100%;
+            height: auto;
+            display: none;
+        }
+        .image-container img.active {
+            display: block;
+        }
+        .hotspot, .switch-area {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            display: none; /* Hide by default */
+        }
+        .hotspot.active, .switch-area.active {
+            display: block; /* Show only for the active image */
+        }
+        .hotspot:hover::after, .switch-area:hover::after {
+            content: attr(data-title);
+            position: absolute;
+            top: -30px;
+            left: 0;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        .spotify-player {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="image-container">
+    <img src="D:\Music Cafe Webpage\day.png" alt="Day Image" id="dayImage" class="active">
+    <img src="D:\Music Cafe Webpage\night.png" alt="Night Image" id="nightImage">
+    
+    <!-- Switch Button -->
+    <div class="switch-area active" id="switch-img1" style="top: 35%; left: 5%;" 
+         data-title="Light Switch" 
+	 data-image="both"
+         onclick="toggleImages()"></div>
+
+    <!-- Commonly shared items -->
+    <div class="hotspot active" style="top: 13%; left: 11%;" 
+         data-title="Kim Sejeong full discrography (credits: Sejeongdays)" 
+         data-image="both"
+         onclick="updateSpotifyPlayer('https://open.spotify.com/embed/playlist/0jZ5rHg77H2E5nnSgQe1NA')"></div>
+    <div class="hotspot active" id="hotspot1-img1" style="top: 30%; left: 83%;" 
+         data-title="Album - Door" 
+         data-image="both"
+         onclick="updateSpotifyPlayer('https://open.spotify.com/embed/album/5MO48BnK6X9VlYtFHpJtvy')"></div>
+    <div class="hotspot active" id="hotspot2-img1" style="top: 30%; left: 87%;" 
+         data-title="Album - I'm" 
+         data-image="both"
+         onclick="updateSpotifyPlayer('https://open.spotify.com/embed/album/085XU5PQYl7eUA97BkkE8Z')"></div>
+    <div class="hotspot active" id="hotspot3-img1" style="top: 40%; left: 83%;" 
+         data-title="Album - Plant" 
+         data-image="both"
+         onclick="updateSpotifyPlayer('https://open.spotify.com/embed/album/5KftzhKELNjc4oxGiGQvRf')"></div>
+    <div class="hotspot active" id="hotspot4-img1" style="top: 40%; left: 87%;" 
+         data-title="Single - Whale" 
+         data-image="both"
+         onclick="updateSpotifyPlayer('https://open.spotify.com/embed/album/33xJchEJEX9MMspAs6JY9n')"></div>
+    <div class="hotspot active" id="hotspot5-img1" style="top: 47%; left: 83%;" 
+         data-title="Single - Tunnel" 
+         data-image="both"
+         onclick="updateSpotifyPlayer('https://open.spotify.com/embed/album/1djBKnosx9GxbAcnoLLBJW')"></div>
+    <div class="hotspot active" style="top: 48%; left: 87%;" 
+         data-title="Single - Flower Way" 
+         data-image="both"
+         onclick="updateSpotifyPlayer('https://open.spotify.com/embed/album/32dL7nyPowMbiu8QFrAkIM')"></div>
+    <div class="hotspot active" style="top: 26%; left: 20%;" 
+  	 data-title="Over The Rainbow" 
+         data-image="both"
+  	 onclick="updateSpotifyPlayer('https://open.spotify.com/embed/track/3dMZHb00FCTwQcKJ8QZ1RQ')"></div>
+    <div class="hotspot active" style="top: 32%; left: 20%;" 
+   	 data-title="Voyage"
+         data-image="both" 
+  	 onclick="updateSpotifyPlayer('https://open.spotify.com/embed/track/3rmpG6Vtgt3L7aLhbk5RKv')"></div>
+    <div class="hotspot active" style="top: 50%; left: 20%;" 
+  	 data-title="Whale"
+         data-image="both" 
+  	 onclick="updateSpotifyPlayer('https://open.spotify.com/embed/track/4UnBxdw1l3J31WBsgmHezz')"></div>
+    <div class="hotspot active" style="top: 56%; left: 15%;" 
+  	 data-title="Meet Again" 
+         data-image="both"
+  	 onclick="updateSpotifyPlayer('https://open.spotify.com/embed/track/4dnuWQVdDlt4D5VmGqSfLx')"></div>
+    <div class="hotspot active" style="top: 56%; left: 25%;" 
+   	 data-title="Send a Letter"
+         data-image="both" 
+  	 onclick="updateSpotifyPlayer('https://open.spotify.com/embed/track/6VJJNA3mthgqRC0btVUEou')"></div>
+    <div class="hotspot active"  style="top: 60%; left: 31%;" 
+  	 data-title="Love, Maybe" 
+         data-image="both"
+  	 onclick="updateSpotifyPlayer('https://open.spotify.com/embed/track/3HbX8AD9hZgkDqd5eRxD0G')"></div>
+    <div class="hotspot active" style="top: 56%; left: 40%;" 
+  	 data-title="Plant" 
+         data-image="both"
+  	 onclick="updateSpotifyPlayer('https://open.spotify.com/embed/track/0CJcFbU8aO6Quj6KXXANMz')"></div>
+    <div class="hotspot active" style="top: 70%; left: 40%;" 
+  	 data-title="Flower Way" 
+         data-image="both"
+  	 onclick="updateSpotifyPlayer('https://open.spotify.com/embed/track/1dOD5F2hX5TBtKdQlEseR7')"></div>
+    <div class="hotspot active" style="top: 59%; left: 43%;" 
+  	 data-title="Betweem Summer and Winter" 
+         data-image="both"
+  	 onclick="updateSpotifyPlayer('https://open.spotify.com/embed/track/1GZmbmT6gt6Ugo5wByRg2X')"></div>
+    <div class="hotspot active" style="top: 60%; left: 51%;" 
+  	 data-title="In My Dream" 
+         data-image="both"
+  	 onclick="updateSpotifyPlayer('https://open.spotify.com/embed/track/59aPed7AGGtbC4ro8Bc6BW')"></div>
+    <div class="hotspot active" style="top: 56%; left: 55%;" 
+  	 data-title="Let's go home" 
+         data-image="both"
+  	 onclick="updateSpotifyPlayer('https://open.spotify.com/embed/track/7J00hW1bd6Zp3wykjQCP8M')"></div>
+    <div class="hotspot active" style="top: 62%; left: 58%;" 
+  	 data-title="If We Do" 
+         data-image="both"
+  	 onclick="updateSpotifyPlayer('https://open.spotify.com/embed/track/2LScFap6LJ2fDqChzqU2f6')"></div>
+    <div class="hotspot active" style="top: 35%; left: 70%;" 
+  	 data-title="Sea of Hope" 
+         data-image="both"
+  	 onclick="updateSpotifyPlayer('https://open.spotify.com/embed/track/6f0xsJSUdXOdiZlcHHoCe7')"></div>
+    <div class="hotspot active" style="top: 43%; left: 67%;" 
+  	 data-title="Tunnel" 
+         data-image="both"
+  	 onclick="updateSpotifyPlayer('https://open.spotify.com/embed/track/0BZj6AmUyA39EDPmfoEif4')"></div>
+    <div class="hotspot active" style="top: 50%; left: 67%;" 
+  	 data-title="Jenga" 
+         data-image="both"
+  	 onclick="updateSpotifyPlayer('https://open.spotify.com/embed/track/7lxe8cNQIhyw3UnBajLix3')"></div>
+    <div class="hotspot active" style="top: 62%; left: 66%;" 
+  	 data-title="Once again" 
+         data-image="both"
+  	 onclick="updateSpotifyPlayer('https://open.spotify.com/embed/track/3ja3PmUOFbZZP1ip3HWC28')"></div>
+    <div class="hotspot active" style="top: 29%; left: 75%;" 
+  	 data-title="Warning" 
+         data-image="both"
+  	 onclick="updateSpotifyPlayer('https://open.spotify.com/embed/track/1j795THd14Z0PmA3O18EwU')"></div>
+    <div class="hotspot active" style="top: 40%; left: 75%;" 
+  	 data-title="Hopes for tomorrow" 
+         data-image="both"
+  	 onclick="updateSpotifyPlayer('https://open.spotify.com/embed/track/42eewgMbNuAeSvvpiUufsv')"></div>
+    <div class="hotspot active" style="top: 53%; left: 75%;" 
+  	 data-title="What's this regarding?" 
+         data-image="both"
+  	 onclick="updateSpotifyPlayer('https://open.spotify.com/embed/track/3qKI6XiNiAnnPkEuj8YlZs')"></div>
+    <div class="hotspot active" style="top: 70%; left: 75%;" 
+  	 data-title="Teddy bear" 
+         data-image="both"
+  	 onclick="updateSpotifyPlayer('https://open.spotify.com/embed/track/6ED0tnBoWmQdJHDBKL0w4e')"></div>
+
+<!-- Exclusive day image -->
+    <div class="hotspot active" style="top: 45%; left: 12%;" 
+         data-title="In the rain" 
+         data-image="day"
+         onclick="updateSpotifyPlayer('https://open.spotify.com/embed/track/6GHImEFtVtM9purNNe0D54')"></div>
+    <div class="hotspot active" style="top: 74%; left: 72%;" 
+         data-title="We, the Reds" 
+         data-image="day"
+         onclick="updateSpotifyPlayer('https://open.spotify.com/embed/track/11msA8zwlCWThs4QFTZaLO')"></div>
+
+<!-- Exclusive night image -->
+    <div class="hotspot active" style="top: 45%; left: 12%;" 
+         data-title="Indigo Promise" 
+         data-image="night"
+         onclick="updateSpotifyPlayer('https://open.spotify.com/embed/track/6VWzt56Bdkw2BoDOUrRSrp')"></div>
+    <div class="hotspot" style="top: 68%; left: 30%;" 
+         data-title="Two of us" 
+	 data-image="night"
+         onclick="updateSpotifyPlayer('https://open.spotify.com/embed/track/6iEN1jW4u0QjcBsg3AV6R1')"></div>
+    <div class="hotspot" style="top: 62%; left: 38%;" 
+         data-title="Do dum chit" 
+	 data-image="night"
+         onclick="updateSpotifyPlayer('https://open.spotify.com/embed/track/46bN1wIFJy2w0E0pQlEjYm')"></div>
+    <div class="hotspot" style="top: 44%; left: 44%;" 
+         data-title="Skyline" 
+	 data-image="night"
+         onclick="updateSpotifyPlayer('https://open.spotify.com/embed/track/1VO8RJxFecb2flEEImb34o')"></div>
+    <div class="hotspot" style="top: 31%; left: 53%;" 
+         data-title="Destiny" 
+	 data-image="night"
+         onclick="updateSpotifyPlayer('https://open.spotify.com/embed/track/0yYHajn8cpZweSrfgo41p7')"></div>
+
+</div>
+
+<!-- Spotify Player -->
+<div class="spotify-player">
+    <iframe id="spotifyPlayer" 
+            src="https://open.spotify.com/embed/playlist/0jZ5rHg77H2E5nnSgQe1NA" 
+            width="300" 
+            height="80" 
+            frameborder="0" 
+            allowtransparency="true" 
+            allow="encrypted-media">
+    </iframe>
+</div>
+
+<script>
+    function toggleImages() {
+        const dayImage = document.getElementById('dayImage');
+        const nightImage = document.getElementById('nightImage');
+        const hotspots = document.querySelectorAll('.hotspot');
+
+        if (dayImage.classList.contains('active')) {
+            dayImage.classList.remove('active');
+            nightImage.classList.add('active');
+            hotspots.forEach(hotspot => {
+                if (hotspot.dataset.image === 'night' || hotspot.dataset.image === 'both') {
+                    hotspot.classList.add('active');
+                } else {
+                    hotspot.classList.remove('active');
+                }
+            });
+        } else {
+            nightImage.classList.remove('active');
+            dayImage.classList.add('active');
+            hotspots.forEach(hotspot => {
+                if (hotspot.dataset.image === 'day' || hotspot.dataset.image === 'both') {
+                    hotspot.classList.add('active');
+                } else {
+                    hotspot.classList.remove('active');
+                }
+            });
+        }
+    }
+
+// Update the Spotify iframe player with the given URL
+    function updateSpotifyPlayer(embedUrl) {
+        const player = document.getElementById('spotifyPlayer');
+        player.src = embedUrl;
+    }
+
+</script>
+</body>
+</html>
